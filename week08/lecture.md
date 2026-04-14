@@ -111,6 +111,22 @@ mysql -u root -p < week08.sql
 **Q：`code .` 指令在 WSL 中無法使用？**
 首次使用時，VS Code 會自動在 WSL 中安裝 VS Code Server。如果失敗，確認你的 VS Code 是最新版本，並且已安裝 WSL 擴充套件。
 
+**Q：連線 WSL 時卡在 `Installing VS Code Server... Downloading: 0%` 很久？**
+
+這是因為 VS Code 需要從微軟雲端（`update.code.visualstudio.com`）下載 Server 到 WSL 裡（約 50-100MB），不是本機複製。只有首次連線或 VS Code 更新版本後才需要下載，之後就不會再跑了。
+
+常見原因與解法：
+
+| 原因 | 解法 |
+|------|------|
+| WSL 內 DNS 設定異常 | 在 WSL 終端執行：`sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'`，再重新連線 |
+| 網路環境不穩定 | 關閉 VS Code，重新開啟後再試一次 |
+| 防火牆阻擋 | 確認防火牆允許 VS Code 連外 |
+
+**如果下載一直跑不動，先這樣操作：**
+
+不需要等 VS Code Server 裝好也能做本週練習。直接從 Windows 開始選單搜尋 `Ubuntu`，開啟 WSL 終端機，就可以操作 MySQL。VS Code 連線讓它之後再處理即可。
+
 ---
 
 ## 第一部分：WSL 環境設定與 MySQL 安裝
